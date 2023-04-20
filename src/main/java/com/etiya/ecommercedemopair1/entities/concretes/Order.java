@@ -24,10 +24,6 @@ public class Order {
     @Column(name="status")
     private boolean status;
 
-    @OneToOne
-    @JoinColumn(name="id", referencedColumnName = "id")
-    private Invoice invoice;
-
     @OneToMany(mappedBy = "order")
     private List<ProductOrder> productOrders;
 

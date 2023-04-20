@@ -14,11 +14,12 @@ import java.util.List;
 @Table(name="product_attributes")
 public class ProductAttribute {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "id")
     private Product product;
 
     @OneToMany(mappedBy = "productAttribute")
