@@ -14,7 +14,6 @@ import java.util.Date;
 @Table(name="invoices")
 public class Invoice {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
 
@@ -30,6 +29,9 @@ public class Invoice {
     @Column(name="quantity")
     private int quantity;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "id")
     private Order order;
+
 }

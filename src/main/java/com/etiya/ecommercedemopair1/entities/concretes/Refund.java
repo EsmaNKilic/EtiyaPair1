@@ -26,7 +26,9 @@ public class Refund {
     @Column(name="date")
     private Date date;
 
-    @OneToOne(mappedBy = "refund")
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "id")
     private Product product;
 
     @ManyToOne()

@@ -18,6 +18,8 @@ public class CorporateCustomer {
     @Column(name="company_name")
     private String companyName;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "id")
     private Customer customer;
 }

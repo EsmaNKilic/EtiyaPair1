@@ -23,13 +23,13 @@ public class Card {
     private String name;
 
     @Column(name="card_no")
-    private int cardNo;
+    private String cardNo;
 
     @Column(name="expire_date")
     private Date expireDate;
 
     @Column(name="cvv")
-    private int cvv;
+    private String cvv;
 
     @OneToMany(mappedBy = "card")
     private List<Payment> payments;
