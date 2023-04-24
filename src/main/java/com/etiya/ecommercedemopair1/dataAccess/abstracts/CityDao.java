@@ -1,4 +1,4 @@
-package com.etiya.ecommercedemopair1.dataAccess.contretes;
+package com.etiya.ecommercedemopair1.dataAccess.abstracts;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
