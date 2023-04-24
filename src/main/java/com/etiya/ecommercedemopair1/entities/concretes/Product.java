@@ -27,14 +27,6 @@ public class Product {
     @Column(name = "units_in_stock")
     private int unitsInStock;
 
-    @OneToOne
-    @JoinColumn(name="id")
-    private ProductAttribute productAttribute;
-
-    @OneToOne
-    @JoinColumn(name="id", referencedColumnName = "id")
-    private Refund refund;
-
     @OneToMany(mappedBy = "product") //solda yazan yer bulunduğun class yani şu an product = one
     private List<ProductCategory> productCategories;
 

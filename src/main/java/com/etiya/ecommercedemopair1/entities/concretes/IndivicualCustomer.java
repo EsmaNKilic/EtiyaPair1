@@ -18,6 +18,8 @@ public class IndivicualCustomer {
     @Column(name="identity_no")
     private String identityNo;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "id")
     private Customer customer;
 }

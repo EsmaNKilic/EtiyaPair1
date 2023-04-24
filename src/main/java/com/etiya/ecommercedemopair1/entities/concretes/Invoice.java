@@ -30,6 +30,8 @@ public class Invoice {
     @Column(name="quantity")
     private int quantity;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "id")
     private Order order;
 }

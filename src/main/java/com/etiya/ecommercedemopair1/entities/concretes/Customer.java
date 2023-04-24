@@ -26,19 +26,10 @@ public class Customer {
     @Column(name="phone_number")
     private int phoneNumber;
 
-    @OneToOne
-    @JoinColumn(name="id")
-    private IndivicualCustomer indivicualCustomer;
-
-    @OneToOne
-    @JoinColumn(name="id")
-    private CorporateCustomer corporateCustomer;
-
     @OneToMany(mappedBy = "customer")
     private List<Address> addresses;
 
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
-
 
 }
