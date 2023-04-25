@@ -5,6 +5,7 @@ import com.etiya.ecommercedemopair1.business.concrate.CategoryManager;
 import com.etiya.ecommercedemopair1.entities.concretes.Category;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,5 +21,10 @@ public class CategoriesController {
     @GetMapping("")
     public List<Category> getAll() {
         return categoryService.getAll();
+    }
+
+    @PostMapping("")
+    public void Add(Category category){
+        categoryService.Add(category);
     }
 }
