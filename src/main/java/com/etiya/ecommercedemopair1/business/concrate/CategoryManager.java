@@ -19,4 +19,15 @@ public class CategoryManager implements CategoryService {
     public List<Category> getAll() {
        return categoryDao.findAll();
     }
+
+    @Override
+    public void Add(Category category) {
+      var result= categoryDao.FindByName(category.getName());
+
+      if (result!=null){
+          return;
+      }
+
+        categoryDao.save(category);
+    }
 }
