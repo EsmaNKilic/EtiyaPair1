@@ -1,7 +1,6 @@
 package com.etiya.ecommercedemopair1.api.controllers;
 
-import com.etiya.ecommercedemopair1.business.abstracts.CategoryService;
-import com.etiya.ecommercedemopair1.business.concrate.CategoryManager;
+import com.etiya.ecommercedemopair1.dataAccess.abstracts.repositories.abstracts.CategoryService;
 import com.etiya.ecommercedemopair1.entities.concretes.Category;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,5 +25,10 @@ public class CategoriesController {
     @PostMapping("")
     public void Add(Category category){
         categoryService.Add(category);
+    }
+
+    @GetMapping("/{id}")
+    public Category GetById(int id) {
+        return categoryService.GetById(id);
     }
 }

@@ -1,10 +1,9 @@
-package com.etiya.ecommercedemopair1.business.concrate;
+package com.etiya.ecommercedemopair1.dataAccess.abstracts.repositories.concrate;
 
-import com.etiya.ecommercedemopair1.business.abstracts.CategoryService;
+import com.etiya.ecommercedemopair1.dataAccess.abstracts.repositories.abstracts.CategoryService;
 import com.etiya.ecommercedemopair1.dataAccess.abstracts.CategoryDao;
 import com.etiya.ecommercedemopair1.entities.concretes.Category;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,12 +21,14 @@ public class CategoryManager implements CategoryService {
 
     @Override
     public void Add(Category category) {
-      var result= categoryDao.FindByName(category.getName());
-
-      if (result!=null){
-          return;
-      }
-
+        Category categoryToFind = categoryDao.findByName(category.getName());
+        if(categoryToFind != null)
+            return;
         categoryDao.save(category);
+    }
+
+    @Override
+    public Category GetById(int id) {
+        return categoryDao.getById(id);
     }
 }

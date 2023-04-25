@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface OrderDao extends JpaRepository<Order,Integer> {
 
+    Order findByCustomerName (String name);
+
     @Query("from Order where status=:status")
     List<Order> getOrderByStatus (boolean status);
 

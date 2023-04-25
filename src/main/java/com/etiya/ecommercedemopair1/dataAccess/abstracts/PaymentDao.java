@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface PaymentDao extends JpaRepository<Payment, Integer> {
 
+    Payment findByMethodType(String Type);
     @Query("from Payment where methodType=:methodType")
     List<Payment> getByPaymentForMethodtype(String methodType);
 
