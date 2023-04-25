@@ -17,7 +17,7 @@ public class Payment {
     private int id;
 
     @Column(name="method_type")
-    private String mothod_type;
+    private String methodType;
 
     @Column(name="installment")
     private int installment;

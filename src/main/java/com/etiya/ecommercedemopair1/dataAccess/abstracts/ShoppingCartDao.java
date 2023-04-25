@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ShoppingCartDao extends JpaRepository<ShoppingCart,Integer> {
-    @Query("from ShoppingCart where discount<:total_price")
+    @Query("from ShoppingCart where discount<:discount")
     List<ShoppingCart> getByShoppingCartDiscount(double discount);
 }

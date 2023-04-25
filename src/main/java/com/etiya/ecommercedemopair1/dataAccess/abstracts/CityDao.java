@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface CityDao extends JpaRepository<CityDao,Integer> {
-    @Query("from City where name like %=:word%")
+public interface CityDao extends JpaRepository<City,Integer> {
+    @Query("from City where name like '%=:word%'")
     List<City> getCityByNameContains(String word);
 }
