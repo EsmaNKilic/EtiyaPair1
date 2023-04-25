@@ -1,5 +1,4 @@
 package com.etiya.ecommercedemopair1.dataAccess.abstracts;
-
 import com.etiya.ecommercedemopair1.entities.concretes.Size;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
