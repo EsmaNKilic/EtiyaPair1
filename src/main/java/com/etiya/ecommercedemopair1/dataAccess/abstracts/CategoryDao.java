@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface CategoryDao extends JpaRepository<Category,Integer> {
 
-    Category FindByName(String name);
+    Category findByName(String name);
 
     @Query("from Category where id=:id")
     Category getCategoryById(int id);
