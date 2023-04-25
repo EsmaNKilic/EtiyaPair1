@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface SizeDao extends JpaRepository<Size, Integer> {
-
     @Query("from Size where width=:width and height=:height")
     List<Size> getSizeBySize(double width, double height);
 

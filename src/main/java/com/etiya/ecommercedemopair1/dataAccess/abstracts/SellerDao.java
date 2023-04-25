@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface SellerDao extends JpaRepository<Seller,Integer> {
     @Query("from Seller where boutiqueName= 'ENK'")
-    List<Seller> getBySellerBoutiqueName(String boutiqueName);
+    List<Seller> getBySellerBoutiqueName();
 }
