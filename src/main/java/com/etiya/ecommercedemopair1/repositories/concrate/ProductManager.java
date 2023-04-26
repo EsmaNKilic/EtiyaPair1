@@ -1,7 +1,7 @@
-package com.etiya.ecommercedemopair1.dataAccess.abstracts.repositories.concrate;
+package com.etiya.ecommercedemopair1.repositories.concrate;
 
 import com.etiya.ecommercedemopair1.dataAccess.abstracts.ProductDao;
-import com.etiya.ecommercedemopair1.dataAccess.abstracts.repositories.abstracts.ProductService;
+import com.etiya.ecommercedemopair1.repositories.abstracts.ProductService;
 import com.etiya.ecommercedemopair1.entities.concretes.Product;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

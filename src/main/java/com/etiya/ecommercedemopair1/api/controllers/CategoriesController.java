@@ -1,6 +1,6 @@
 package com.etiya.ecommercedemopair1.api.controllers;
 
-import com.etiya.ecommercedemopair1.dataAccess.abstracts.repositories.abstracts.CategoryService;
+import com.etiya.ecommercedemopair1.repositories.abstracts.CategoryService;
 import com.etiya.ecommercedemopair1.entities.concretes.Category;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +18,7 @@ public class CategoriesController {
     private final CategoryService categoryService;
 
     @GetMapping("")
+    // Business katmanı ile ilişki kurar.
     public List<Category> getAll() {
         return categoryService.getAll();
     }

@@ -1,4 +1,4 @@
-package com.etiya.ecommercedemopair1.dataAccess.abstracts.repositories.abstracts;
+package com.etiya.ecommercedemopair1.repositories.abstracts;
 
 import com.etiya.ecommercedemopair1.entities.concretes.Product;
 
