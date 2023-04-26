@@ -1,7 +1,11 @@
 package com.etiya.ecommercedemopair1.business.concrate;
 
 import com.etiya.ecommercedemopair1.business.abstracts.CategoryService;
+
+import com.etiya.ecommercedemopair1.ropositories.abstracts.CategoryDao;
+
 import com.etiya.ecommercedemopair1.repositories.abstracts.CategoryDao;
+
 import com.etiya.ecommercedemopair1.entities.concretes.Category;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,6 +13,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+
+@AllArgsConstructor
+public class CategoryManager implements CategoryService {
+    
+    private final CategoryDao categoryDao;
+
 @AllArgsConstructor // Bu varken autowired yapmaya gerek kalmaz.
 public class CategoryManager implements CategoryService {
     private final CategoryDao categoryDao;
@@ -16,6 +26,7 @@ public class CategoryManager implements CategoryService {
     //@Autowired -> anatasyon, springin ilgili const. ilgili bağımlılıklarını springe iletir.
     // Otomatik olarak instance oluşturur, bağımlılıkları otomatik enjekte eder yani onun karşılığını git container'den al der.
     // IoC'de dependency injection yöntemi ile bir nesnenin referansını verir.
+
     @Override
     public List<Category> getAll() {
        return categoryDao.findAll();
