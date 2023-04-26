@@ -18,6 +18,7 @@ public class CategoriesController {
     private final CategoryService categoryService;
 
     @GetMapping("")
+    // Business katmanı ile ilişki kurar.
     public List<Category> getAll() {
         return categoryService.getAll();
     }
