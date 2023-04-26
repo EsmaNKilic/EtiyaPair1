@@ -1,7 +1,5 @@
 package com.etiya.ecommercedemopair1.api.controllers;
-
-
-import com.etiya.ecommercedemopair1.repositories.abstracts.AddressService;
+import com.etiya.ecommercedemopair1.business.abstracts.AddressService;
 import com.etiya.ecommercedemopair1.entities.concretes.Address;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
