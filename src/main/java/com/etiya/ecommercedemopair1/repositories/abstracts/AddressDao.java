@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface AddressDao extends JpaRepository<Address,Integer> {
-
     Address findByCountry (String name);
 
     @Query("from Address where customer=:id")

@@ -1,8 +1,6 @@
 package com.etiya.ecommercedemopair1.business.concrate;
 
 
-import com.etiya.ecommercedemopair1.ropositories.abstracts.OrderDao;
-
 import com.etiya.ecommercedemopair1.repositories.abstracts.OrderDao;
 
 import com.etiya.ecommercedemopair1.business.abstracts.OrderService;
@@ -15,8 +13,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class OrderManager implements OrderService {
-
-    private final OrderDao orderDao;
+    private OrderDao orderDao;
 
     @Override
     public void add(Order order) {

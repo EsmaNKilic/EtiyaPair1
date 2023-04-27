@@ -2,12 +2,15 @@ package com.etiya.ecommercedemopair1.api.controllers;
 
 
 import com.etiya.ecommercedemopair1.business.abstracts.ProductService;
+import com.etiya.ecommercedemopair1.business.dtos.requests.product.AddProductRequest;
+import com.etiya.ecommercedemopair1.business.dtos.responses.product.AddProductResponse;
+import com.etiya.ecommercedemopair1.business.dtos.responses.product.ListProductResponse;
+import com.etiya.ecommercedemopair1.business.dtos.responses.product.ProductDetailResponse;
+import com.etiya.ecommercedemopair1.core.results.DataResult;
 import com.etiya.ecommercedemopair1.entities.concretes.Product;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,21 +18,20 @@ import java.util.List;
 @RequestMapping("/api/products")
 @AllArgsConstructor
 public class ProductsController {
+    private ProductService productService;
 
-    private final ProductService productService;
+    @PostMapping("")
+    public DataResult<AddProductResponse> add(@Valid AddProductRequest addProductRequest){
+        return productService.add(addProductRequest);
+    }
 
     @GetMapping("")
-    public List<Product> getAll() {
+    public DataResult<List<ListProductResponse>> getAll(){
         return productService.getAll();
     }
 
-    @PostMapping("")
-    public void Add(Product product){
-        productService.add(product);
-    }
-
-    @GetMapping("/{id}")
-    public Product getById(int id) {
+    @GetMapping("{id}")
+    public DataResult<ProductDetailResponse> getById(@PathVariable int id){
         return productService.getById(id);
     }
 }

@@ -1,12 +1,14 @@
 package com.etiya.ecommercedemopair1.api.controllers;
 
 import com.etiya.ecommercedemopair1.business.abstracts.CategoryService;
+import com.etiya.ecommercedemopair1.business.dtos.requests.category.AddCategoryRequest;
+import com.etiya.ecommercedemopair1.business.dtos.responses.category.AddCategoryResponse;
+import com.etiya.ecommercedemopair1.business.dtos.responses.category.ListCategoryResponse;
+import com.etiya.ecommercedemopair1.core.results.DataResult;
 import com.etiya.ecommercedemopair1.entities.concretes.Category;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,21 +17,21 @@ import java.util.List;
 @AllArgsConstructor
 public class CategoriesController {
 
-    private final CategoryService categoryService;
+    private CategoryService categoryService;
 
     @GetMapping("")
     // Business katmanı ile ilişki kurar.
-    public List<Category> getAll() {
+    public DataResult<List<ListCategoryResponse>> getAll() {
         return categoryService.getAll();
     }
 
     @PostMapping("")
-    public void Add(Category category){
-        categoryService.Add(category);
+    public DataResult<AddCategoryResponse> add(@Valid @RequestBody AddCategoryRequest addCategoryRequest) throws Exception{
+        return categoryService.add(addCategoryRequest);
     }
 
-    @GetMapping("/{id}")
-    public Category GetById(int id) {
+    /*@GetMapping("/{id}")
+    public DataResult<Category> GetById(@PathVariable int id) {
         return categoryService.GetById(id);
-    }
+    }*/
 }

@@ -15,8 +15,7 @@ import java.util.List;
 @RequestMapping("/api/orders")
 @AllArgsConstructor
 public class OrdersController {
-
-    private final OrderService orderService;
+    private OrderService orderService;
 
     @GetMapping("")
     public List<Order> getAll() {

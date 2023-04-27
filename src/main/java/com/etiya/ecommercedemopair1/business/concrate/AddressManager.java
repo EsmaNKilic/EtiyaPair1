@@ -1,8 +1,6 @@
 package com.etiya.ecommercedemopair1.business.concrate;
 
 
-import com.etiya.ecommercedemopair1.ropositories.abstracts.AddressDao;
-
 import com.etiya.ecommercedemopair1.repositories.abstracts.AddressDao;
 
 import com.etiya.ecommercedemopair1.business.abstracts.AddressService;
@@ -15,8 +13,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class AddressManager implements AddressService {
-
-    private final AddressDao addressDao;
+    private AddressDao addressDao;
 
     @Override
     public List<Address> getAll() {

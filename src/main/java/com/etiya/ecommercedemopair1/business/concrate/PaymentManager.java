@@ -1,8 +1,6 @@
 package com.etiya.ecommercedemopair1.business.concrate;
 
 
-import com.etiya.ecommercedemopair1.ropositories.abstracts.PaymentDao;
-
 import com.etiya.ecommercedemopair1.repositories.abstracts.PaymentDao;
 
 import com.etiya.ecommercedemopair1.business.abstracts.PaymentService;
@@ -15,8 +13,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class PaymentManager implements PaymentService {
-
-    private final PaymentDao paymentDao;
+    private PaymentDao paymentDao;
 
     @Override
     public void add(Payment payment) {
