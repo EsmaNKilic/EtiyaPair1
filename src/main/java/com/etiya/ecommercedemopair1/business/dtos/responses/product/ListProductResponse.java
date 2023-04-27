@@ -12,5 +12,5 @@ public class ListProductResponse {
     private int id;
     private String name;
     private double unitPrice;
-    private Category category;
+    private String categoryName;
 }
