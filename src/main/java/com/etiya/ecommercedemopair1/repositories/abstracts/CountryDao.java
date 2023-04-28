@@ -1,7 +1,6 @@
 package com.etiya.ecommercedemopair1.repositories.abstracts;
 
-import com.etiya.ecommercedemopair1.entities.concretes.Country;
-import com.etiya.ecommercedemopair1.entities.concretes.District;
+import com.etiya.ecommercedemopair1.business.concretes.Country;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

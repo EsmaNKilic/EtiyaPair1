@@ -4,9 +4,7 @@ import com.etiya.ecommercedemopair1.business.dtos.requests.product.AddProductReq
 import com.etiya.ecommercedemopair1.business.dtos.responses.product.AddProductResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.product.ListProductResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.product.ProductDetailResponse;
-import com.etiya.ecommercedemopair1.core.results.DataResult;
-import com.etiya.ecommercedemopair1.core.results.Result;
-import com.etiya.ecommercedemopair1.entities.concretes.Product;
+import com.etiya.ecommercedemopair1.core.utils.results.DataResult;
 
 import java.util.List;
 

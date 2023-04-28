@@ -5,14 +5,13 @@ import com.etiya.ecommercedemopair1.business.dtos.responses.product.AddProductRe
 import com.etiya.ecommercedemopair1.business.dtos.responses.product.ListProductResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.product.ProductDetailResponse;
 import com.etiya.ecommercedemopair1.core.utils.mapping.ModelMapperService;
-import com.etiya.ecommercedemopair1.core.results.DataResult;
-import com.etiya.ecommercedemopair1.core.results.SuccessDataResult;
+import com.etiya.ecommercedemopair1.core.utils.results.DataResult;
+import com.etiya.ecommercedemopair1.core.utils.results.SuccessDataResult;
 import com.etiya.ecommercedemopair1.repositories.abstracts.ProductDao;
 
 import com.etiya.ecommercedemopair1.business.abstracts.ProductService;
-import com.etiya.ecommercedemopair1.entities.concretes.Product;
+import com.etiya.ecommercedemopair1.business.concretes.Product;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

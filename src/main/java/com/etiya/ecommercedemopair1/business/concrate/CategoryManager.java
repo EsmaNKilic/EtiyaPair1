@@ -5,13 +5,16 @@ import com.etiya.ecommercedemopair1.business.abstracts.CategoryService;
 import com.etiya.ecommercedemopair1.business.dtos.requests.category.AddCategoryRequest;
 import com.etiya.ecommercedemopair1.business.dtos.responses.category.AddCategoryResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.category.ListCategoryResponse;
+import com.etiya.ecommercedemopair1.core.exceptions.BusinessException;
 import com.etiya.ecommercedemopair1.core.utils.mapping.ModelMapperService;
-import com.etiya.ecommercedemopair1.core.results.DataResult;
-import com.etiya.ecommercedemopair1.core.results.SuccessDataResult;
+import com.etiya.ecommercedemopair1.core.utils.results.DataResult;
+import com.etiya.ecommercedemopair1.core.utils.results.SuccessDataResult;
 import com.etiya.ecommercedemopair1.repositories.abstracts.CategoryDao;
 
-import com.etiya.ecommercedemopair1.entities.concretes.Category;
+import com.etiya.ecommercedemopair1.business.concretes.Category;
 import lombok.AllArgsConstructor;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +25,7 @@ import java.util.stream.Collectors;
 public class CategoryManager implements CategoryService {
     private CategoryDao categoryDao;
     private ModelMapperService modelMapperService;
+    private MessageSource messageSource;
 
     //@Autowired -> anatasyon, springin ilgili const. ilgili bağımlılıklarını springe iletir. CategoryDao'yu enjekte edecek ortamı verecek.
     // Otomatik olarak instance oluşturur, bağımlılıkları otomatik enjekte eder yani onun karşılığını git container'den al der.
@@ -51,7 +55,12 @@ public class CategoryManager implements CategoryService {
     }*/
 
     @Override
-    public DataResult<AddCategoryResponse> add(AddCategoryRequest addCategoryRequest){
+    public DataResult<AddCategoryResponse> add(AddCategoryRequest addCategoryRequest)throws Exception{
+
+        Category categoryToFind = categoryDao.findByName(addCategoryRequest.getName());
+        if(categoryToFind != null)
+            // new BusinessException();
+            throw new BusinessException(messageSource.getMessage("categoryExists",null, LocaleContextHolder.getLocale()));
 
         Category category = this.modelMapperService.forRequest().map(addCategoryRequest, Category.class);
 

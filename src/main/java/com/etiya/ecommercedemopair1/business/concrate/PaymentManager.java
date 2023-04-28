@@ -4,7 +4,7 @@ package com.etiya.ecommercedemopair1.business.concrate;
 import com.etiya.ecommercedemopair1.repositories.abstracts.PaymentDao;
 
 import com.etiya.ecommercedemopair1.business.abstracts.PaymentService;
-import com.etiya.ecommercedemopair1.entities.concretes.Payment;
+import com.etiya.ecommercedemopair1.business.concretes.Payment;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

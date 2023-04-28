@@ -1,7 +1,7 @@
 package com.etiya.ecommercedemopair1.repositories.abstracts;
 
 import com.etiya.ecommercedemopair1.business.dtos.responses.category.ListCategoryResponse;
-import com.etiya.ecommercedemopair1.entities.concretes.Category;
+import com.etiya.ecommercedemopair1.business.concretes.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

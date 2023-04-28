@@ -3,7 +3,7 @@ package com.etiya.ecommercedemopair1.business.abstracts;
 import com.etiya.ecommercedemopair1.business.dtos.requests.category.AddCategoryRequest;
 import com.etiya.ecommercedemopair1.business.dtos.responses.category.AddCategoryResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.category.ListCategoryResponse;
-import com.etiya.ecommercedemopair1.core.results.DataResult;
+import com.etiya.ecommercedemopair1.core.utils.results.DataResult;
 
 import java.util.List;
 
