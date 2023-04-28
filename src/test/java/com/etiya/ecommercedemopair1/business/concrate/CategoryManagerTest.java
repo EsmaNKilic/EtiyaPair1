@@ -20,6 +20,7 @@ class CategoryManagerTest {
 
     @Test
     void add() {
+        // deneme
         // 3A Principle ↓
         // Arrange => Test yapılacak ortamı hazırlar, mock objelerin oluşturulması, bağımlılıkların yüklenmesi
         // Act(Action) => CategoryManager.add(); test edeceğin metodun işleme alınması
