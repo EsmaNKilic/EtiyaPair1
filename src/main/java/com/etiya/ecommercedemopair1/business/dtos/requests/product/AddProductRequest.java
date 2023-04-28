@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.lang.NonNull;
 
 @Data
 @AllArgsConstructor
@@ -20,4 +21,5 @@ public class AddProductRequest {
     @NotNull( message = "Bu alan boş kalamaz ")
     @Positive(message = "ürünün fiyatı 0 veya negatif olamaz")
     private Double unitPrice;
+
 }

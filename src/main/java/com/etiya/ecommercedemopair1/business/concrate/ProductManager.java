@@ -12,6 +12,7 @@ import com.etiya.ecommercedemopair1.repositories.abstracts.ProductDao;
 import com.etiya.ecommercedemopair1.business.abstracts.ProductService;
 import com.etiya.ecommercedemopair1.entities.concretes.Product;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+
 public class ProductManager implements ProductService {
   private ProductDao productDao;
   private ModelMapperService modelMapperService;

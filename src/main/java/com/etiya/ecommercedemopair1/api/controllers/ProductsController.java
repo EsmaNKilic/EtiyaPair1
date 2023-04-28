@@ -10,6 +10,7 @@ import com.etiya.ecommercedemopair1.core.results.DataResult;
 import com.etiya.ecommercedemopair1.entities.concretes.Product;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/products")
 @AllArgsConstructor
+
 public class ProductsController {
     private ProductService productService;
 

@@ -4,8 +4,6 @@ import com.etiya.ecommercedemopair1.business.dtos.requests.category.AddCategoryR
 import com.etiya.ecommercedemopair1.business.dtos.responses.category.AddCategoryResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.category.ListCategoryResponse;
 import com.etiya.ecommercedemopair1.core.results.DataResult;
-import com.etiya.ecommercedemopair1.core.results.Result;
-import com.etiya.ecommercedemopair1.entities.concretes.Category;
 
 import java.util.List;
 
