@@ -16,16 +16,16 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private int id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
 
     @Column(name = "unit_price")
-    private double unitPrice;
+    private Double unitPrice;
 
     @Column(name = "units_in_stock")
-    private int unitsInStock;
+    private Integer unitsInStock;
 
     @OneToMany(mappedBy = "product") //solda yazan yer bulunduğun class yani şu an product = one
     private List<ProductCategory> productCategories;

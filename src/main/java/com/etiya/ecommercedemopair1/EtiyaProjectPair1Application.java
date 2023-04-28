@@ -29,7 +29,7 @@ public class EtiyaProjectPair1Application {
     }
 
     @Bean
-    public ModelMapper getMapper(){
+    public ModelMapper GetModelMapper(){
         return new ModelMapper();
     }
 
