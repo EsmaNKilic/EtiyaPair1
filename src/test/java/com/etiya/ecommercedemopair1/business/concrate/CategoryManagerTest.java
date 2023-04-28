@@ -4,7 +4,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class CategoryManagerTest {
 
@@ -20,7 +19,7 @@ class CategoryManagerTest {
 
     @Test
     void add() {
-        // denemeggg
+        // github
         // 3A Principle ↓
         // Arrange => Test yapılacak ortamı hazırlar, mock objelerin oluşturulması, bağımlılıkların yüklenmesi
         // Act(Action) => CategoryManager.add(); test edeceğin metodun işleme alınması
