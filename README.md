@@ -1,5 +1,5 @@
 # EtiyaPair1
 
-Efe Denizer Köprülü
+Efe Denizer Köprülü /n
 Esma Nur Kılıç
 İbrahim yıldırım
