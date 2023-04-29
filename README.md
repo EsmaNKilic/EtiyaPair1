@@ -1,7 +1,4 @@
-
-
-# Project Developer
-<hr/>
+# Project Developers
 
 <h2> Efe Denizer Köprülü </h2> <bt/>
 <h2>Esma Nur Kılıç</h2> <bt/>
