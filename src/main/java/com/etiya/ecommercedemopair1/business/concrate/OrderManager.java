@@ -52,6 +52,13 @@ public class OrderManager implements OrderService {
         OrderDetailResponse response = this.modelMapperService.forResponse().map(order, OrderDetailResponse.class);
 
         return new SuccessDataResult<OrderDetailResponse>(response);
+
+        /*OrderDetailResponse detailResponse = orderDao.getOrderDetails(id);
+
+        return  new SuccessDataResult<OrderDetailResponse>(detailResponse);
+
+         */
+
     }
 
     @Override

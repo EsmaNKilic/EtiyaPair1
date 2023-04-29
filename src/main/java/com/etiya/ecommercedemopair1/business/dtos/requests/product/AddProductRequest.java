@@ -14,7 +14,6 @@ public class AddProductRequest {
 
     @NotBlank(message = "Name alanı boş bırakılamaz!") // alan boş bırakılamaz
     @NotNull(message = "Name alanı boş bırakılamaz!") // direkt alanı getirmez
-    //@Length(min = 2, message = "Name alanı 2 karakterden kısa olamaz!")
     @Size(min = 2, message = "Name alanı 2 karakterden kısa olamaz!")
     private String name;
 
