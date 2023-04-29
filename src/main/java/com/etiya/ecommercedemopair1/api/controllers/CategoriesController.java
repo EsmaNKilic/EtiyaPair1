@@ -2,9 +2,13 @@ package com.etiya.ecommercedemopair1.api.controllers;
 
 import com.etiya.ecommercedemopair1.business.abstracts.CategoryService;
 import com.etiya.ecommercedemopair1.business.dtos.requests.category.AddCategoryRequest;
+import com.etiya.ecommercedemopair1.business.dtos.requests.category.UpdateCategoryRequest;
 import com.etiya.ecommercedemopair1.business.dtos.responses.category.AddCategoryResponse;
+import com.etiya.ecommercedemopair1.business.dtos.responses.category.CategoryDetailResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.category.ListCategoryResponse;
+import com.etiya.ecommercedemopair1.business.dtos.responses.category.UpdateCategoryResponse;
 import com.etiya.ecommercedemopair1.core.utils.results.DataResult;
+import com.etiya.ecommercedemopair1.core.utils.results.Result;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -24,13 +28,25 @@ public class CategoriesController {
         return categoryService.getAll();
     }
 
+     @GetMapping("/{id}")
+    public DataResult<CategoryDetailResponse> GetById(@PathVariable int id) {
+        return categoryService.GetById(id);
+    }
+
     @PostMapping("")
     public DataResult<AddCategoryResponse> add(@Valid @RequestBody AddCategoryRequest addCategoryRequest) throws Exception{
         return categoryService.add(addCategoryRequest);
     }
 
-    /*@GetMapping("/{id}")
-    public DataResult<Category> GetById(@PathVariable int id) {
-        return categoryService.GetById(id);
-    }*/
+    @PutMapping()
+    public DataResult<UpdateCategoryResponse> update(@Valid @RequestBody UpdateCategoryRequest updateCategoryRequest){
+        return  categoryService.update(updateCategoryRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable int id){
+        return this.categoryService.delete(id);
+    }
+
+
 }

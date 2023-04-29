@@ -2,12 +2,18 @@ package com.etiya.ecommercedemopair1.api.controllers;
 
 
 import com.etiya.ecommercedemopair1.business.abstracts.OrderService;
-import com.etiya.ecommercedemopair1.business.concretes.Order;
+import com.etiya.ecommercedemopair1.business.dtos.requests.order.AddOrderRequest;
+import com.etiya.ecommercedemopair1.business.dtos.requests.order.UpdateOrderRequest;
+import com.etiya.ecommercedemopair1.business.dtos.responses.order.AddOrderResponse;
+import com.etiya.ecommercedemopair1.business.dtos.responses.order.ListOrderResponse;
+import com.etiya.ecommercedemopair1.business.dtos.responses.order.OrderDetailResponse;
+import com.etiya.ecommercedemopair1.business.dtos.responses.order.UpdateOrderResponse;
+import com.etiya.ecommercedemopair1.core.utils.results.DataResult;
+import com.etiya.ecommercedemopair1.core.utils.results.Result;
+import com.etiya.ecommercedemopair1.entities.concretes.Order;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,17 +24,27 @@ public class OrdersController {
     private OrderService orderService;
 
     @GetMapping("")
-    public List<Order> getAll() {
+    public DataResult<List<ListOrderResponse>> getAll() {
         return orderService.getAll();
     }
 
-    @PostMapping("")
-    public void Add(Order order) {
-        orderService.add(order);
+    @GetMapping("/{id}")
+    public DataResult<OrderDetailResponse> GetById(@PathVariable int id) {
+        return this.orderService.getById(id);
     }
 
-    @GetMapping("/{id}")
-    public Order getById(int id) {
-        return orderService.getById(id);
+    @PostMapping("")
+    public DataResult<AddOrderResponse> add(@Valid @RequestBody AddOrderRequest addOrderRequest) throws Exception{
+        return orderService.add(addOrderRequest);
+    }
+
+    @PutMapping()
+    public DataResult<UpdateOrderResponse> update(@Valid @RequestBody UpdateOrderRequest updateOrderRequest){
+        return this.orderService.update(updateOrderRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable int id){
+        return this.orderService.delete(id);
     }
 }

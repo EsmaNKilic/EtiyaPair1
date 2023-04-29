@@ -1,6 +1,6 @@
 package com.etiya.ecommercedemopair1.business.abstracts;
 
-import com.etiya.ecommercedemopair1.business.concretes.Address;
+import com.etiya.ecommercedemopair1.entities.concretes.Address;
 
 import java.util.List;
 

@@ -16,11 +16,11 @@ public class Result {
         this.message = message;
     }
 
-    public boolean isSuccess() {
+   /* public boolean isSuccess() {
         return this.success;
     }
 
     public String getMessage() {
         return this.message;
-    }
+    }*/
 }

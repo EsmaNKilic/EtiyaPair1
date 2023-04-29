@@ -1,5 +1,8 @@
 package com.etiya.ecommercedemopair1.core.utils.results;
 
+import lombok.Getter;
+
+@Getter
 //Generic => Herhangi bir tip olabilir (T)
 public class DataResult<T> extends Result{
     private T data;
@@ -13,7 +16,7 @@ public class DataResult<T> extends Result{
         this.data = data;
     }
 
-    public T getData() {
+    /*public T getData() {
         return this.data;
-    }
+    }*/
 }

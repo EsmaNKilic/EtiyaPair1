@@ -3,15 +3,20 @@ package com.etiya.ecommercedemopair1.business.concrate;
 import com.etiya.ecommercedemopair1.business.abstracts.CategoryService;
 
 import com.etiya.ecommercedemopair1.business.dtos.requests.category.AddCategoryRequest;
+import com.etiya.ecommercedemopair1.business.dtos.requests.category.UpdateCategoryRequest;
 import com.etiya.ecommercedemopair1.business.dtos.responses.category.AddCategoryResponse;
+import com.etiya.ecommercedemopair1.business.dtos.responses.category.CategoryDetailResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.category.ListCategoryResponse;
+import com.etiya.ecommercedemopair1.business.dtos.responses.category.UpdateCategoryResponse;
 import com.etiya.ecommercedemopair1.core.exceptions.BusinessException;
 import com.etiya.ecommercedemopair1.core.utils.mapping.ModelMapperService;
 import com.etiya.ecommercedemopair1.core.utils.results.DataResult;
+import com.etiya.ecommercedemopair1.core.utils.results.Result;
 import com.etiya.ecommercedemopair1.core.utils.results.SuccessDataResult;
+import com.etiya.ecommercedemopair1.core.utils.results.SuccessResult;
 import com.etiya.ecommercedemopair1.repositories.abstracts.CategoryDao;
 
-import com.etiya.ecommercedemopair1.business.concretes.Category;
+import com.etiya.ecommercedemopair1.entities.concretes.Category;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -44,15 +49,15 @@ public class CategoryManager implements CategoryService {
         return new SuccessDataResult<List<ListCategoryResponse>>(response);
     }
 
-    /*@Override
-    public DataResult<GetCategoryResponse> GetById(int id) {
+    @Override
+    public DataResult<CategoryDetailResponse> GetById(int id) {
 
         Category category = this.categoryDao.findById(id).get();
 
-        GetCategoryResponse response = this.modelMapperService.forResponse().map(category, GetCategoryResponse.class);
+        CategoryDetailResponse response = this.modelMapperService.forResponse().map(category, CategoryDetailResponse.class);
 
-        return new SuccessDataResult<GetCategoryResponse>(response);
-    }*/
+        return new SuccessDataResult<CategoryDetailResponse>(response);
+    }
 
     @Override
     public DataResult<AddCategoryResponse> add(AddCategoryRequest addCategoryRequest)throws Exception{
@@ -68,6 +73,28 @@ public class CategoryManager implements CategoryService {
 
         AddCategoryResponse response = this.modelMapperService.forResponse().map(category, AddCategoryResponse.class);
 
-        return new SuccessDataResult<AddCategoryResponse>(response);
+        return new SuccessDataResult<AddCategoryResponse>(response, messageSource.getMessage("categoryAdded",null, LocaleContextHolder.getLocale()));
+    }
+
+    @Override
+    public DataResult<UpdateCategoryResponse> update(UpdateCategoryRequest updateCategoryRequest) {
+
+        Category category = this.modelMapperService.forRequest().map(updateCategoryRequest, Category.class);
+
+        category.setId(updateCategoryRequest.getId());
+
+        this.categoryDao.save(category);
+
+        UpdateCategoryResponse response = this.modelMapperService.forResponse().map(category, UpdateCategoryResponse.class);
+
+        return new SuccessDataResult<UpdateCategoryResponse>(response, messageSource.getMessage("categoryUpdated",null, LocaleContextHolder.getLocale()));
+    }
+
+    @Override
+    public Result delete(int id) {
+
+        this.categoryDao.deleteById(id);
+
+        return new SuccessResult(messageSource.getMessage("categoryDeleted",null, LocaleContextHolder.getLocale()));
     }
 }
