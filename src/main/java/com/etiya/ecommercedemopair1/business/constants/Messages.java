@@ -17,6 +17,15 @@ public class Messages {
         public static final String ListedProduct ="productListed";
         public static final String DeletedProduct ="productDeleted";
         public static final String UpdatedProduct = "productUpdated";
-        public  static final String GetOrpductById = "getProduct";
+        public  static final String GetProductById = "getProduct";
+    }
+
+    public  static class  Order{
+        public static final String OrderAdded = "orderAdded";
+        public static final String ListedOrder ="orderListed";
+        public static final String DeletedOrder ="orderDeleted";
+        public static final String UpdatedOrder = "orderUpdated";
+        public  static final String GetOrderById = "getOrder";
+
     }
 }

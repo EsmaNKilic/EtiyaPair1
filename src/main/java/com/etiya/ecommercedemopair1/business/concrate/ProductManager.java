@@ -34,10 +34,10 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 
 public class ProductManager implements ProductService {
-  private ProductDao productDao;
+  private final ProductDao productDao;
   private final CategoryService categoryService;
-  private ModelMapperService modelMapperService;
-  private MessageService messageService;
+  private final ModelMapperService modelMapperService;
+  private final MessageService messageService;
 
     @Override
     public DataResult<List<ListProductResponse>> getAll() {
@@ -59,7 +59,7 @@ public class ProductManager implements ProductService {
 
         ProductDetailResponse response = this.modelMapperService.forResponse().map(product, ProductDetailResponse.class);
 
-        return new SuccessDataResult<ProductDetailResponse>(response,messageService.getMessageWithParams(Messages.Product.GetOrpductById,id));
+        return new SuccessDataResult<ProductDetailResponse>(response,messageService.getMessageWithParams(Messages.Product.GetProductById,id));
     }
 
     @Override

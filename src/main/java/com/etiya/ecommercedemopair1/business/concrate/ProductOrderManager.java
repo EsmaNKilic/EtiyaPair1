@@ -8,11 +8,15 @@ import com.etiya.ecommercedemopair1.core.utils.results.SuccessResult;
 import com.etiya.ecommercedemopair1.entities.concretes.Order;
 import com.etiya.ecommercedemopair1.entities.concretes.ProductOrder;
 import com.etiya.ecommercedemopair1.repositories.abstracts.ProductOrderDao;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@AllArgsConstructor
 public class ProductOrderManager implements ProductOrderService {
     private ProductOrderDao productOrderDao;
     private ModelMapperService modelMapperService;

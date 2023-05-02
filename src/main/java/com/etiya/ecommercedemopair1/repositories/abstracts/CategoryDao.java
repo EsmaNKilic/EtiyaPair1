@@ -15,6 +15,8 @@ public interface CategoryDao extends JpaRepository<Category,Integer> {
 
     boolean existsCategoriesById(int id);
 
+
+
     // JPQL Jpa Query Language => Model ismi kullanır
     // SQL => tablo ismi kullanır
 
