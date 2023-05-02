@@ -2,6 +2,8 @@ package com.etiya.ecommercedemopair1.repositories.abstracts;
 
 import com.etiya.ecommercedemopair1.business.dtos.responses.category.ListCategoryResponse;
 import com.etiya.ecommercedemopair1.entities.concretes.Category;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -11,6 +13,7 @@ public interface CategoryDao extends JpaRepository<Category,Integer> {
 
     Category findByName(String name);
     Category getById(int id);
+    boolean existsCategoryById(int id);
 
     // JPQL Jpa Query Language => Model ismi kullanır
     // SQL => tablo ismi kullanır
@@ -22,5 +25,5 @@ public interface CategoryDao extends JpaRepository<Category,Integer> {
             "From Category c",
             nativeQuery = false)
     List<ListCategoryResponse> getAll();
-
+    Slice<ListCategoryResponse> getAll(Pageable pageable);
 }

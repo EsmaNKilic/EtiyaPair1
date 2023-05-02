@@ -21,4 +21,5 @@ public class AddProductRequest {
     @Positive(message = "ürünün fiyatı 0 veya negatif olamaz")
     private Double unitPrice;
 
+    private int categoryId;
 }

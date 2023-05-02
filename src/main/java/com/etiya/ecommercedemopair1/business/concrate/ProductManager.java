@@ -1,18 +1,19 @@
 package com.etiya.ecommercedemopair1.business.concrate;
 
+import com.etiya.ecommercedemopair1.business.abstracts.CategoryService;
+import com.etiya.ecommercedemopair1.business.constants.Messages;
 import com.etiya.ecommercedemopair1.business.dtos.requests.product.AddProductRequest;
 import com.etiya.ecommercedemopair1.business.dtos.requests.product.UpdateProductRequest;
 import com.etiya.ecommercedemopair1.business.dtos.responses.product.AddProductResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.product.ListProductResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.product.ProductDetailResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.product.UpdateProductResponse;
-import com.etiya.ecommercedemopair1.core.exceptions.BusinessException;
+import com.etiya.ecommercedemopair1.core.exceptions.types.BusinessException;
 import com.etiya.ecommercedemopair1.core.utils.mapping.ModelMapperService;
 import com.etiya.ecommercedemopair1.core.utils.results.DataResult;
 import com.etiya.ecommercedemopair1.core.utils.results.Result;
 import com.etiya.ecommercedemopair1.core.utils.results.SuccessDataResult;
 import com.etiya.ecommercedemopair1.core.utils.results.SuccessResult;
-import com.etiya.ecommercedemopair1.entities.concretes.Category;
 import com.etiya.ecommercedemopair1.repositories.abstracts.ProductDao;
 
 import com.etiya.ecommercedemopair1.business.abstracts.ProductService;
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
 
 public class ProductManager implements ProductService {
   private ProductDao productDao;
+  private final CategoryService categoryService;
   private ModelMapperService modelMapperService;
   private MessageSource messageSource;
 
@@ -59,17 +61,15 @@ public class ProductManager implements ProductService {
     @Override
     public DataResult<AddProductResponse> add(AddProductRequest addProductRequest) {
 
-        Product productToFind = productDao.findByName(addProductRequest.getName());
-        if(productToFind != null)
-            throw new BusinessException(messageSource.getMessage("productExists",null, LocaleContextHolder.getLocale()));
-
         Product product = this.modelMapperService.forRequest().map(addProductRequest, Product.class);
+
+        categoryWithIdShouldExists(addProductRequest.getCategoryId());
 
         this.productDao.save(product);
 
         AddProductResponse response = this.modelMapperService.forResponse().map(product, AddProductResponse.class);
 
-        return new SuccessDataResult<AddProductResponse>(response, messageSource.getMessage("productAdded",null, LocaleContextHolder.getLocale()));
+        return new SuccessDataResult<AddProductResponse>(response, Messages.Product.ProductAdded);
     }
 
     @Override
@@ -95,4 +95,11 @@ public class ProductManager implements ProductService {
     }
 
 
+    //CONTROLS
+    private void categoryWithIdShouldExists(int categoryId){
+        Result categoryExists = categoryService.categoryWithIdShouldExists(categoryId);
+        if(!categoryExists.isSuccess()){
+            throw new BusinessException(Messages.Category.CategoryDoesNotExistsWithGivenId);
+        }
+    }
 }

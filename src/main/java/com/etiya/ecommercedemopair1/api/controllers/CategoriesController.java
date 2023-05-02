@@ -11,6 +11,9 @@ import com.etiya.ecommercedemopair1.core.utils.results.DataResult;
 import com.etiya.ecommercedemopair1.core.utils.results.Result;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +24,12 @@ import java.util.List;
 public class CategoriesController {
 
     private CategoryService categoryService;
+
+    @GetMapping("getWithPagination")
+    public DataResult<Slice<ListCategoryResponse>> getAll(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize){
+        Pageable pageable = PageRequest.of(page,pageSize);
+        return categoryService.getAllWithPagination(pageable);
+    }
 
     @GetMapping("")
     // Business katmanı ile ilişki kurar.

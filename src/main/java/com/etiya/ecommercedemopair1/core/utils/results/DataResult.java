@@ -19,4 +19,13 @@ public class DataResult<T> extends Result{
     /*public T getData() {
         return this.data;
     }*/
+
+    @Override
+    public boolean equals(Object obj){
+        if(!(obj instanceof DataResult<?>)) return false;
+        if(this.isSuccess() != ((DataResult<?>) obj).isSuccess()) return false;
+        if(this.getMessage() != ((DataResult<?>) obj).getMessage()) return false;
+        if(this.data.getClass() != ((DataResult<?>) obj).getData().getClass()) return false;
+        return true;
+    }
 }
