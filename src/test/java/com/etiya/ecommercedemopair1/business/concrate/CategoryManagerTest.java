@@ -5,6 +5,7 @@ import com.etiya.ecommercedemopair1.business.dtos.responses.category.ListCategor
 import com.etiya.ecommercedemopair1.business.dtos.responses.category.UpdateCategoryResponse;
 import com.etiya.ecommercedemopair1.core.exceptions.types.BusinessException;
 import com.etiya.ecommercedemopair1.core.exceptions.types.NotFoundException;
+import com.etiya.ecommercedemopair1.core.internationalization.MessageService;
 import com.etiya.ecommercedemopair1.core.utils.mapping.ModelMapperManager;
 import com.etiya.ecommercedemopair1.core.utils.mapping.ModelMapperService;
 import com.etiya.ecommercedemopair1.core.utils.results.DataResult;
@@ -30,16 +31,16 @@ import static org.mockito.Mockito.when;
 class CategoryManagerTest {
     CategoryDao categoryDao;
     ModelMapperService modelMapperService;
-    MessageSource messageSource;
+    MessageService messageService;
     CategoryManager categoryManager;
 
     @BeforeEach
     void setUp() {
         // Her test öncesi çalıştırılacak alan
         modelMapperService = new ModelMapperManager(new ModelMapper());
-        messageSource = getBundleMessageSource();
+        messageService. = getBundleMessageSource();
         categoryDao = mock(CategoryDao.class);
-        categoryManager = new CategoryManager(categoryDao, modelMapperService, messageSource);
+        categoryManager = new CategoryManager(categoryDao, modelMapperService,messageService);
     }
 
     public ResourceBundleMessageSource getBundleMessageSource(){

@@ -23,6 +23,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.FieldError;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,9 +31,9 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor // Bu varken autowired yapmaya gerek kalmaz,constructorlamayı otomatikleştirir
 public class CategoryManager implements CategoryService {
-    private CategoryDao categoryDao;
-    private ModelMapperService modelMapperService;
-    private MessageService messageService;
+    private final CategoryDao categoryDao;
+    private final ModelMapperService modelMapperService;
+    private final MessageService messageService;
 
     //@Autowired -> anatasyon, springin ilgili const. ilgili bağımlılıklarını springe iletir. CategoryDao'yu enjekte edecek ortamı verecek.
     // Otomatik olarak instance oluşturur, bağımlılıkları otomatik enjekte eder yani onun karşılığını git container'den al der.
@@ -53,8 +54,10 @@ public class CategoryManager implements CategoryService {
                 .map(category, ListCategoryResponse.class))
                 .collect(Collectors.toList());
 
-        return new SuccessDataResult<List<ListCategoryResponse>>(response);
+        return new SuccessDataResult<List<ListCategoryResponse>>(response, messageService.getMessage(Messages.Category.ListedCategory));
     }
+
+
 
     @Override
     public DataResult<CategoryDetailResponse> GetById(int id) {
@@ -63,7 +66,7 @@ public class CategoryManager implements CategoryService {
 
         CategoryDetailResponse response = this.modelMapperService.forResponse().map(category, CategoryDetailResponse.class);
 
-        return new SuccessDataResult<CategoryDetailResponse>(response);
+        return new SuccessDataResult<CategoryDetailResponse>(response,messageService.getMessageWithParams(Messages.Category.GetCategoryById,id));
     }
 
     @Override
@@ -77,12 +80,12 @@ public class CategoryManager implements CategoryService {
 
         AddCategoryResponse response = this.modelMapperService.forResponse().map(category, AddCategoryResponse.class);
 
-        return new SuccessDataResult<AddCategoryResponse>(response);
+        return new SuccessDataResult<AddCategoryResponse>(response,messageService.getMessage(Messages.Category.CategoryAdded));
     }
 
     @Override
     public Result categoryWithIdShouldExists(int categoryId) {
-        boolean isCategoryExists = categoryDao.existsCategoryById(categoryId);
+        boolean isCategoryExists = categoryDao.existsCategoriesById(categoryId);
         if(isCategoryExists)
             return new SuccessResult();
         return new ErrorResult();
@@ -93,7 +96,7 @@ public class CategoryManager implements CategoryService {
         checkIfCategoryWithIdExists(updateCategoryRequest.getId());
 
         Category category = categoryDao.findById(updateCategoryRequest.getId())
-                .orElseThrow(() -> new NotFoundException(messageService.getMessageWithParams(Messages.Category.CategoryDoesNotExistsWithGivenId, updateCategoryRequest.getId())));
+                .orElseThrow(() -> new NotFoundException(Messages.Category.CategoryExists));
         checkIfCategoryWithSameNameExists(updateCategoryRequest.getName());
 
         category.setId(updateCategoryRequest.getId());
@@ -102,28 +105,26 @@ public class CategoryManager implements CategoryService {
 
         UpdateCategoryResponse response = this.modelMapperService.forResponse().map(category, UpdateCategoryResponse.class);
 
-        return new SuccessDataResult<UpdateCategoryResponse>(response);
+        return new SuccessDataResult<UpdateCategoryResponse>(response,messageService.getMessageWithParams(Messages.Category.UpdatedCategory,updateCategoryRequest.getId()));
     }
 
     @Override
     public Result delete(int id) {
-
         this.categoryDao.deleteById(id);
-
-        return new SuccessResult();
+        return new SuccessResult(messageService.getMessage(Messages.Category.DeletedCategory));
     }
 
 
     //CONTROLS
     private void checkIfCategoryWithIdExists(int categoryId){
         if(!categoryWithIdShouldExists(categoryId).isSuccess())
-            throw new BusinessException(messageService.getMessage(Messages.Category.CategoryDoesNotExistsWithGivenId));
+            throw new BusinessException(Messages.Product.ProductAdded);
     }
 
     private void checkIfCategoryWithSameNameExists(String categoryName){
         Category categoryToFind = categoryDao.findByName(categoryName);
         if(categoryToFind != null)
-            throw new BusinessException(messageService.getMessage(Messages.Category.CategoryExists));
+            throw new BusinessException(Messages.Category.CategoryExists);
     }
 
 }

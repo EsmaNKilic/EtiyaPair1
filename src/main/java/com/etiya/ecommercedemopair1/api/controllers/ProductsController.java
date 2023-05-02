@@ -12,6 +12,9 @@ import com.etiya.ecommercedemopair1.core.utils.results.DataResult;
 import com.etiya.ecommercedemopair1.core.utils.results.Result;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,4 +53,10 @@ public class ProductsController {
         return this.productService.delete(id);
     }
 
+
+    @GetMapping("/getWithPagination")
+    public DataResult<Slice<ListProductResponse>> getAllWithPagination(@RequestParam int pageNo, @RequestParam int pageSize){
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
+        return productService.getAllWithPagination(pageable);
+    }
 }

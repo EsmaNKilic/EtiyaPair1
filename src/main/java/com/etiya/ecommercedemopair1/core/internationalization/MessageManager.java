@@ -2,9 +2,12 @@ package com.etiya.ecommercedemopair1.core.internationalization;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.stereotype.Service;
 
-public class MessageManager implements MessageService{
+@Service
+public class MessageManager implements MessageService {
     private MessageSource messageSource;
 
     @Autowired

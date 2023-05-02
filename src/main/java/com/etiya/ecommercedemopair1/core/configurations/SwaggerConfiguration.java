@@ -9,9 +9,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.HandlerMethod;
 
+
 @Configuration
 public class SwaggerConfiguration {
-    // Swagger'a tüm istekler için bir "Accept-Language" header alanı açmasını söyleyeceğiz..
 
     @Bean
     public OperationCustomizer customGlobalHeaders(){

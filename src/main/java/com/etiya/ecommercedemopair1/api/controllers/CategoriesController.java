@@ -23,11 +23,11 @@ import java.util.List;
 @AllArgsConstructor
 public class CategoriesController {
 
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
 
-    @GetMapping("getWithPagination")
+    @GetMapping("/getWithPagination")
     public DataResult<Slice<ListCategoryResponse>> getAll(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize){
-        Pageable pageable = PageRequest.of(page,pageSize);
+        Pageable pageable = PageRequest.of(page-1,pageSize);
         return categoryService.getAllWithPagination(pageable);
     }
 

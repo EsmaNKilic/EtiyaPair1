@@ -22,7 +22,7 @@ public class ProductOrderManager implements ProductOrderService {
     @Override
     public Result addRange(int orderId, List<AddProductOrderRequest> addProductOrderRequest) {
         for (AddProductOrderRequest request: addProductOrderRequest) {
-            ProductOrder detail = modelMapperService.getMapper.map(request, ProductOrder.class);
+            ProductOrder detail = modelMapperService.forRequest().map(request, ProductOrder.class);
             Order order = new Order();
             order.setId(orderId);
             detail.setOrder(order);
@@ -31,4 +31,4 @@ public class ProductOrderManager implements ProductOrderService {
         return new SuccessResult();
     }
     }
-}
+

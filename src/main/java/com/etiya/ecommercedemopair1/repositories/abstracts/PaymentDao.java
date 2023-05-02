@@ -1,6 +1,7 @@
 package com.etiya.ecommercedemopair1.repositories.abstracts;
 
 import com.etiya.ecommercedemopair1.entities.concretes.Payment;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -14,4 +15,5 @@ public interface PaymentDao extends JpaRepository<Payment, Integer> {
 
     @Query("select p.id,c.name from Payment p inner join Card c on c.id = p.card.id")
     List<Payment> getPaymentByCardName();
+
 }

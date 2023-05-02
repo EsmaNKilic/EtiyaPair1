@@ -9,10 +9,9 @@ import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 import java.util.Locale;
 @Configuration
 public class MessageSourceConfiguration {
-    // Boilerplate => Basmakalıp
     @Bean
     public ResourceBundleMessageSource bundleMessageSource(){
-        // Veritabanı
+        // Veritabanı?
         // Dosya
         // API
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
@@ -21,13 +20,15 @@ public class MessageSourceConfiguration {
         return messageSource;
     }
 
+    // Kullanıcıdan kullanmak istediği dili nasıl konfigüre etmeli?
+
     @Bean
     public LocaleResolver localeResolver(){
-        // Clientden seçili dili hangi yöntemle almalıyız?
+        // Clientdan seçili dili hangi yöntemle almalıyım?
         AcceptHeaderLocaleResolver acceptHeaderLocaleResolver = new AcceptHeaderLocaleResolver();
 
         // Dil gönderilmemişse hangi dili baz alayım?
-        acceptHeaderLocaleResolver.setDefaultLocale(Locale.US); // (new Locale("tr")) şeklinde de kullanabilirsin.
+        acceptHeaderLocaleResolver.setDefaultLocale(new Locale("tr"));
 
         return acceptHeaderLocaleResolver;
     }

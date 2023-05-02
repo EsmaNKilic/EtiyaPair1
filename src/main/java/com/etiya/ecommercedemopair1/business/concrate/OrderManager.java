@@ -19,6 +19,8 @@ import com.etiya.ecommercedemopair1.entities.concretes.Order;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -86,5 +88,10 @@ public class OrderManager implements OrderService {
         this.orderDao.deleteById(id);
 
         return new SuccessResult(messageSource.getMessage("orderDeleted", null, LocaleContextHolder.getLocale()));
+    }
+
+    @Override
+    public DataResult<Slice<ListOrderResponse>> getAllWithPagination(Pageable pageable) {
+        return  new SuccessDataResult<>(orderDao.getAll(pageable));
     }
 }

@@ -10,7 +10,5 @@ public class EtiyaProjectPair1Application {
 
     public static void main(String[] args) {
         SpringApplication.run(EtiyaProjectPair1Application.class, args);
-
-        //Locale.setDefault(new Locale("en","tr"));
     }
 }

@@ -9,6 +9,8 @@ import com.etiya.ecommercedemopair1.business.dtos.responses.order.UpdateOrderRes
 import com.etiya.ecommercedemopair1.core.utils.results.DataResult;
 import com.etiya.ecommercedemopair1.core.utils.results.Result;
 import com.etiya.ecommercedemopair1.entities.concretes.Order;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 
 import java.util.List;
 
@@ -18,6 +20,8 @@ public interface OrderService {
     DataResult<AddOrderResponse> add(AddOrderRequest addOrderRequest);
     DataResult<UpdateOrderResponse> update(UpdateOrderRequest updateOrderRequest);
     Result delete(int id);
+
+    DataResult<Slice<ListOrderResponse>>  getAllWithPagination(Pageable pageable);
 
 
 

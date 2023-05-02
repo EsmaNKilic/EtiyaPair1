@@ -4,11 +4,13 @@ import com.etiya.ecommercedemopair1.business.abstracts.CategoryService;
 import com.etiya.ecommercedemopair1.business.constants.Messages;
 import com.etiya.ecommercedemopair1.business.dtos.requests.product.AddProductRequest;
 import com.etiya.ecommercedemopair1.business.dtos.requests.product.UpdateProductRequest;
+import com.etiya.ecommercedemopair1.business.dtos.responses.category.ListCategoryResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.product.AddProductResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.product.ListProductResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.product.ProductDetailResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.product.UpdateProductResponse;
 import com.etiya.ecommercedemopair1.core.exceptions.types.BusinessException;
+import com.etiya.ecommercedemopair1.core.internationalization.MessageService;
 import com.etiya.ecommercedemopair1.core.utils.mapping.ModelMapperService;
 import com.etiya.ecommercedemopair1.core.utils.results.DataResult;
 import com.etiya.ecommercedemopair1.core.utils.results.Result;
@@ -21,6 +23,8 @@ import com.etiya.ecommercedemopair1.entities.concretes.Product;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +37,7 @@ public class ProductManager implements ProductService {
   private ProductDao productDao;
   private final CategoryService categoryService;
   private ModelMapperService modelMapperService;
-  private MessageSource messageSource;
+  private MessageService messageService;
 
     @Override
     public DataResult<List<ListProductResponse>> getAll() {
@@ -45,7 +49,7 @@ public class ProductManager implements ProductService {
                         .map(product, ListProductResponse.class))
                 .collect(Collectors.toList());
 
-        return new SuccessDataResult<List<ListProductResponse>>(response);
+        return new SuccessDataResult<List<ListProductResponse>>(response,messageService.getMessage(Messages.Product.ListedProduct));
     }
 
     @Override
@@ -55,7 +59,7 @@ public class ProductManager implements ProductService {
 
         ProductDetailResponse response = this.modelMapperService.forResponse().map(product, ProductDetailResponse.class);
 
-        return new SuccessDataResult<ProductDetailResponse>(response);
+        return new SuccessDataResult<ProductDetailResponse>(response,messageService.getMessageWithParams(Messages.Product.GetOrpductById,id));
     }
 
     @Override
@@ -69,7 +73,7 @@ public class ProductManager implements ProductService {
 
         AddProductResponse response = this.modelMapperService.forResponse().map(product, AddProductResponse.class);
 
-        return new SuccessDataResult<AddProductResponse>(response, Messages.Product.ProductAdded);
+        return new SuccessDataResult<AddProductResponse>(response, messageService.getMessage(Messages.Product.ProductAdded));
     }
 
     @Override
@@ -83,7 +87,7 @@ public class ProductManager implements ProductService {
 
         UpdateProductResponse response = this.modelMapperService.forResponse().map(product, UpdateProductResponse.class);
 
-        return new SuccessDataResult<UpdateProductResponse>(response,messageSource.getMessage("productUpdated",null, LocaleContextHolder.getLocale()));
+        return new SuccessDataResult<UpdateProductResponse>(response,messageService.getMessageWithParams(Messages.Product.UpdatedProduct,updateProductRequest.getId()));
     }
 
     @Override
@@ -91,9 +95,13 @@ public class ProductManager implements ProductService {
 
         this.productDao.deleteById(id);
 
-        return new SuccessResult(messageSource.getMessage("productDeleted",null, LocaleContextHolder.getLocale()));
+        return new SuccessResult(messageService.getMessage(Messages.Product.DeletedProduct));
     }
 
+    @Override
+    public DataResult<Slice<ListProductResponse>> getAllWithPagination(Pageable pageable) {
+        return  new SuccessDataResult<>(productDao.getAll(pageable));
+    }
 
     //CONTROLS
     private void categoryWithIdShouldExists(int categoryId){

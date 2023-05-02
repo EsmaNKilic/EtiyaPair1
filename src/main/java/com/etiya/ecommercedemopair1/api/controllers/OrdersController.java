@@ -13,6 +13,9 @@ import com.etiya.ecommercedemopair1.core.utils.results.Result;
 import com.etiya.ecommercedemopair1.entities.concretes.Order;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,5 +49,12 @@ public class OrdersController {
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable int id){
         return this.orderService.delete(id);
+    }
+
+
+    @GetMapping("/getWithPagination")
+    public DataResult<Slice<ListOrderResponse>> getAllWithPagination(@RequestParam int pageNo, @RequestParam int pageSize) {
+    Pageable pageable=PageRequest.of(pageNo-1, pageSize);
+    return orderService.getAllWithPagination(pageable);
     }
 }

@@ -15,10 +15,17 @@ import java.util.List;
 
 public interface CategoryService {
     DataResult<Slice<ListCategoryResponse>> getAllWithPagination(Pageable pageable);
+
     DataResult<List<ListCategoryResponse>> getAll();
-    DataResult<CategoryDetailResponse> GetById (int id);
+
+
+    DataResult<CategoryDetailResponse> GetById(int id);
+
     DataResult<AddCategoryResponse> add(AddCategoryRequest addCategoryRequest) throws Exception;
+
     DataResult<UpdateCategoryResponse> update(UpdateCategoryRequest updateCategoryRequest);
+
     Result delete(int id);
+
     Result categoryWithIdShouldExists(int categoryId);
 }
