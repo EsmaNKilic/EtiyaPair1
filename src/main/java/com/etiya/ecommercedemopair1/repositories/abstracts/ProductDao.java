@@ -16,11 +16,6 @@ public interface ProductDao extends JpaRepository<Product,Integer> {
          " from Product p JOIN p.productCategories  join Category c order by p.name")
    List<ListProductResponse> getAll();
 
-   @Query(value="Select new com.etiya.ecommercedemopair1.business.dtos.responses.product" +
-         ".ProductDetailResponse(p.id, p.name, c.id ,c.name)" +
-         "from Product p Join p.productCategories join Category c Where p.id=:id ")
-   ProductDetailResponse getById(int id);
-
     @Query("from Product where name=:name")
     List<Product> getProductByName(String name);
 

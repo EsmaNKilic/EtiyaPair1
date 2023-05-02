@@ -53,12 +53,6 @@ public class OrderManager implements OrderService {
 
         return new SuccessDataResult<OrderDetailResponse>(response);
 
-        /*OrderDetailResponse detailResponse = orderDao.getOrderDetails(id);
-
-        return  new SuccessDataResult<OrderDetailResponse>(detailResponse);
-
-         */
-
     }
 
     @Override
@@ -70,7 +64,7 @@ public class OrderManager implements OrderService {
 
         AddOrderResponse response = this.modelMapperService.forResponse().map(order, AddOrderResponse.class);
 
-        return new SuccessDataResult<AddOrderResponse>(response, messageSource.getMessage("orderAdded",null, LocaleContextHolder.getLocale()));
+        return new SuccessDataResult<AddOrderResponse>(response, messageSource.getMessage("orderAdded", null, LocaleContextHolder.getLocale()));
     }
 
     @Override
@@ -83,7 +77,7 @@ public class OrderManager implements OrderService {
 
         UpdateOrderResponse response = this.modelMapperService.forResponse().map(order, UpdateOrderResponse.class);
 
-        return new SuccessDataResult<UpdateOrderResponse>(response, messageSource.getMessage("orderUpdated",null, LocaleContextHolder.getLocale()));
+        return new SuccessDataResult<UpdateOrderResponse>(response, messageSource.getMessage("orderUpdated", null, LocaleContextHolder.getLocale()));
     }
 
     @Override
@@ -91,6 +85,6 @@ public class OrderManager implements OrderService {
 
         this.orderDao.deleteById(id);
 
-        return new SuccessResult(messageSource.getMessage("orderDeleted",null, LocaleContextHolder.getLocale()));
+        return new SuccessResult(messageSource.getMessage("orderDeleted", null, LocaleContextHolder.getLocale()));
     }
 }

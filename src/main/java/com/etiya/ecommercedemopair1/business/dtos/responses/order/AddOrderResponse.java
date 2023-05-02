@@ -11,4 +11,5 @@ public class AddOrderResponse {
     private Integer id;
     private String description;
     private Boolean status;
+    private  Integer productId;
 }

@@ -18,4 +18,5 @@ public class AddOrderRequest {
     @NotNull(message = "Name alanı boş bırakılamaz!") // direkt alanı getirmez
     private Boolean status;
 
+    private String ProductName;
 }

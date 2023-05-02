@@ -13,10 +13,4 @@ public class OrderDetailResponse {
     private String description;
     private Boolean status;
 
-
-   /* private String customerName;
-    private String customerSurname;
-    private Integer phoneNumber;
-    private String productName;
-    */
 }
