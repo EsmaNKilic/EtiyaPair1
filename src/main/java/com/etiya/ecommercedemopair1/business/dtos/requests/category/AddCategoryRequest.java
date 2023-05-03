@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddCategoryRequest {
-    @NotBlank(message = "Bu alan boş bırakılamaz")
-    @NotNull(message = "Bu alan boş bırakılamaz")
-    @Size(min = 2,message = "Bu alan 2 harften küçük olamaz")
+    @NotBlank(message ="{NotEmptyMessage}")
+    @NotNull(message = "{NotEmptyMessage}")
+    @Size(min = 2,message = "{MinCharacterMessage}")
     private String name;
 }

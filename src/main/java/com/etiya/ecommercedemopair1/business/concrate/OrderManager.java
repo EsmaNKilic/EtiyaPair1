@@ -36,7 +36,7 @@ public class OrderManager implements OrderService {
     private final OrderDao orderDao;
     private final ModelMapperService modelMapperService;
     private final MessageService messageService;
-    private  final ProductOrderService productOrderService;
+    private final ProductOrderService productOrderService;
 
 
     @Override
@@ -49,7 +49,7 @@ public class OrderManager implements OrderService {
                         .map(order, ListOrderResponse.class))
                 .collect(Collectors.toList());
 
-        return new SuccessDataResult<List<ListOrderResponse>>(response,messageService.getMessage(Messages.Order.ListedOrder));
+        return new SuccessDataResult<List<ListOrderResponse>>(response, messageService.getMessage(Messages.Order.ListedOrder));
     }
 
     @Override
@@ -58,18 +58,18 @@ public class OrderManager implements OrderService {
 
         OrderDetailResponse response = this.modelMapperService.forResponse().map(order, OrderDetailResponse.class);
 
-        return new SuccessDataResult<OrderDetailResponse>(response,messageService.getMessageWithParams(Messages.Order.GetOrderById,id));
+        return new SuccessDataResult<OrderDetailResponse>(response, messageService.getMessageWithParams(Messages.Order.GetOrderById, id));
 
     }
 
     @Override
     public DataResult<AddOrderResponse> add(AddOrderRequest addOrderRequest) {
 
-      Order order = new Order();
+        Order order = new Order();
 
         this.orderDao.save(order);
 
-        productOrderService.addRange(order.getId(),addOrderRequest.getAddProductOrderRequests());
+        productOrderService.addRange(order.getId(), addOrderRequest.getAddProductOrderRequests());
 
 
         AddOrderResponse response = this.modelMapperService.forResponse().map(order, AddOrderResponse.class);
@@ -81,14 +81,11 @@ public class OrderManager implements OrderService {
     public DataResult<UpdateOrderResponse> update(UpdateOrderRequest updateOrderRequest) {
         Order order = this.modelMapperService.forRequest().map(updateOrderRequest, Order.class);
 
-        order.setId(updateOrderRequest.getId());
-
         this.orderDao.save(order);
-
 
         UpdateOrderResponse response = this.modelMapperService.forResponse().map(order, UpdateOrderResponse.class);
 
-        return new SuccessDataResult<UpdateOrderResponse>(response, messageService.getMessageWithParams(Messages.Order.UpdatedOrder,updateOrderRequest.getId()));
+        return new SuccessDataResult<UpdateOrderResponse>(response, messageService.getMessageWithParams(Messages.Order.UpdatedOrder, updateOrderRequest.getId()));
     }
 
     @Override
@@ -101,6 +98,6 @@ public class OrderManager implements OrderService {
 
     @Override
     public DataResult<Slice<ListOrderResponse>> getAllWithPagination(Pageable pageable) {
-        return  new SuccessDataResult<>(orderDao.getAll(pageable));
+        return new SuccessDataResult<>(orderDao.getAll(pageable));
     }
 }

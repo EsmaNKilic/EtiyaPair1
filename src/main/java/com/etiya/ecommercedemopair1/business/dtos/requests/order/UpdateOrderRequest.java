@@ -12,13 +12,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdateOrderRequest {
 
-    @Positive(message = "0 veya negatif bir değere sahip id olamaz")
-    @NotNull(message = "bu alan boş Bırakılamaz")
+    @Positive(message = "{PositiveValueIdMessage}")
+    @NotNull(message = "{NotEmptyMessage}")
     private Integer id;
 
-    @Size(max = 300, message = "açıklama 300 karakterden uzun olamaz")
+    @Size(max = 300, message = "{MaxCharacterMessage}")
     private String description;
 
-    @NotNull(message = "Name alanı boş bırakılamaz!") // direkt alanı getirmez
+    @NotNull(message = "{NotEmptyMessage}") // direkt alanı getirmez
     private Boolean status;
 }

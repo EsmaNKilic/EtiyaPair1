@@ -13,7 +13,7 @@ public class ModelMapperManager implements ModelMapperService{
     public ModelMapper forResponse() {
         this.modelMapper.getConfiguration()
                 .setAmbiguityIgnored(true)
-                .setMatchingStrategy(MatchingStrategies.LOOSE);
+                .setMatchingStrategy(MatchingStrategies.STANDARD);
 
         return  this.modelMapper;
     }

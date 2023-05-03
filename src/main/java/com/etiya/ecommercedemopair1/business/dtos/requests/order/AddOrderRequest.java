@@ -15,10 +15,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddOrderRequest {
-    @Size(max = 300, message = "açıklama 300 karakterden uzun olamaz")
+    @Size(max = 300, message = "{MaxCharacterMessage}")
     private String description;
 
-    @NotNull(message = "status alanı boş bırakılamaz!") // direkt alanı getirmez
+    @NotNull(message = "{NotEmptyMessage]") // direkt alanı getirmez
     private Boolean status;
 
     private String ProductName;

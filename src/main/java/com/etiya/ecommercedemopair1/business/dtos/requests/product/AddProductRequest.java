@@ -12,13 +12,13 @@ import org.springframework.lang.NonNull;
 @NoArgsConstructor
 public class AddProductRequest {
 
-    @NotBlank(message = "Name alanı boş bırakılamaz!") // alan boş bırakılamaz
-    @NotNull(message = "Name alanı boş bırakılamaz!") // direkt alanı getirmez
-    @Size(min = 2, message = "Name alanı 2 karakterden kısa olamaz!")
+    @NotBlank(message = "{NotEmptyMessage}") // alan boş bırakılamaz
+    @NotNull(message = "{NotEmptyMessage}") // direkt alanı getirmez
+    @Size(min = 2, message = "{MinCharacterMessage}")
     private String name;
 
-    @NotNull( message = "Bu alan boş kalamaz ")
-    @Positive(message = "ürünün fiyatı 0 veya negatif olamaz")
+    @NotNull( message = "{NotEmptyMessage}")
+    @Positive(message = "{PositiveValueIdMessage]")
     private Double unitPrice;
 
     private int categoryId;

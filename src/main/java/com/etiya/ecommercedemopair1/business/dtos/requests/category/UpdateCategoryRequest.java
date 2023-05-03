@@ -13,12 +13,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdateCategoryRequest {
 
-    @Positive(message = "0 veya negatif bir değere sahip id olamaz")
-    @NotNull(message = "bu alan boş Bırakılamaz")
+    @Positive(message = "{PositiveValueIdMessage}")
+    @NotNull(message = "{NotEmptyMessage}")
     private Integer id;
 
-    @NotBlank(message = "Bu alan boş bırakılamaz")
-    @NotNull(message = "Bu alan boş bırakılamaz")
-    @Size(min = 2,message = "Bu alan 2 harften küçük olamaz")
+    @NotBlank(message = "{NotEmptyMessage}")
+    @NotNull(message = "{NotEmptyMessage}")
+    @Size(min = 2,message = "{MinCharacterMessage}")
     private String name;
 }

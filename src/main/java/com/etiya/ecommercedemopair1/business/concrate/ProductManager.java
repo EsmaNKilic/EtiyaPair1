@@ -12,10 +12,7 @@ import com.etiya.ecommercedemopair1.business.dtos.responses.product.UpdateProduc
 import com.etiya.ecommercedemopair1.core.exceptions.types.BusinessException;
 import com.etiya.ecommercedemopair1.core.internationalization.MessageService;
 import com.etiya.ecommercedemopair1.core.utils.mapping.ModelMapperService;
-import com.etiya.ecommercedemopair1.core.utils.results.DataResult;
-import com.etiya.ecommercedemopair1.core.utils.results.Result;
-import com.etiya.ecommercedemopair1.core.utils.results.SuccessDataResult;
-import com.etiya.ecommercedemopair1.core.utils.results.SuccessResult;
+import com.etiya.ecommercedemopair1.core.utils.results.*;
 import com.etiya.ecommercedemopair1.repositories.abstracts.ProductDao;
 
 import com.etiya.ecommercedemopair1.business.abstracts.ProductService;
@@ -81,8 +78,6 @@ public class ProductManager implements ProductService {
 
         Product product = this.modelMapperService.forRequest().map(updateProductRequest, Product.class);
 
-        product.setId(updateProductRequest.getId());
-
         this.productDao.save(product);
 
         UpdateProductResponse response = this.modelMapperService.forResponse().map(product, UpdateProductResponse.class);
@@ -104,10 +99,11 @@ public class ProductManager implements ProductService {
     }
 
     //CONTROLS
-    private void categoryWithIdShouldExists(int categoryId){
-        Result categoryExists = categoryService.categoryWithIdShouldExists(categoryId);
-        if(!categoryExists.isSuccess()){
-            throw new BusinessException(Messages.Category.CategoryDoesNotExistsWithGivenId);
+    private Result categoryWithIdShouldExists(int categoryId){
+        boolean isCategoryExists = productDao.existsById(categoryId);
+        if(isCategoryExists)
+            return new SuccessResult();
+        return new ErrorResult();
         }
     }
-}
+

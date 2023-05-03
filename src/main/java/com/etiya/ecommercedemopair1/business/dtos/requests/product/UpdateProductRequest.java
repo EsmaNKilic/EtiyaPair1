@@ -13,16 +13,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdateProductRequest {
 
-    @Positive(message = "0 veya negatif bir değere sahip id olamaz")
-    @NotNull(message = "bu alan boş Bırakılamaz")
+    @Positive(message = "{PositiveValueIdMessage}")
+    @NotNull(message = "{NotEmptyMessage}")
     private Integer id;
 
-    @NotBlank(message = "Name alanı boş bırakılamaz!") // alan boş bırakılamaz
-    @NotNull(message = "Name alanı zorunludur.!") // direkt alanı getirmez
-    @Size(min = 2, message = "Name alanı 2 karakterden kısa olamaz!")
+    @NotBlank(message = "{NotEmptyMessage}!") // alan boş bırakılamaz
+    @NotNull(message = "{NotEmptyMessage}") // direkt alanı getirmez
+    @Size(min = 2, message = "{PositiveValueIdMessage}")
     private String name;
 
-    @NotNull( message = "Bu alan boş kalamaz ")
-    @Positive(message = "ürünün fiyatı 0 veya negatif olamaz")
+    @NotNull( message = "{NotEmptyMessage} ")
+    @Positive(message = "{PositiveValueIdMessage}")
     private Double unitPrice;
 }

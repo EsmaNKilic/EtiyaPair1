@@ -12,5 +12,4 @@ public class UpdateProductResponse {
     private int id;
     private String name;
     private Double unitPrice;
-    private String categoryName;
 }
