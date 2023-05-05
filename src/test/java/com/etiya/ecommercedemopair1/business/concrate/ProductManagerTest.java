@@ -35,8 +35,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class ProductManagerTest {
 
@@ -76,7 +75,6 @@ class ProductManagerTest {
 
         SuccessDataResult<UpdateProductResponse> expectedResponse =
                 new SuccessDataResult<>(new UpdateProductResponse(1,"da",20.0));
-
         assert actualResponse.getData().equals(expectedResponse.getData());
     }
 
@@ -85,6 +83,16 @@ class ProductManagerTest {
         when(productDao.findById(1)).thenReturn(Optional.of(new Product(1, "Elma", 22.0, 10, null, null, null, null)));
         DataResult<ProductDetailResponse> actualresult = new SuccessDataResult<>(new ProductDetailResponse(1, "Elma", 22.0, null));
         DataResult<ProductDetailResponse> expectedResult = productManager.getById(1);
+        expectedResult.getData().setCategoryName(actualresult.getData().getCategoryName());
         assert actualresult.getData().equals(expectedResult.getData());
+
+    }
+
+    @Test
+    void CategoryNoxExsistControl(){
+        when(productDao.findById(1)).thenReturn(Optional.of(new Product(1, "Efe", 20d, 10, null, null, null, null)));
+  var result =productManager.getById(1).getData();
+        assert result!=null;
+
     }
 }

@@ -43,7 +43,7 @@ public class ExceptionHandlers {
     // 404 not found
     @ExceptionHandler({NotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public Result handleNotFoundException(NotFoundException exception){
+    public Result handleNotFoundException(NotFoundException exception) {
         return new ErrorResult(exception.getMessage());
     }
 }

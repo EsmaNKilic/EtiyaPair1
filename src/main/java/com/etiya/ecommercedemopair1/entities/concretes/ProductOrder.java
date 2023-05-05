@@ -24,4 +24,6 @@ public class ProductOrder {
     @JoinColumn(name="order_id")
     private Order order;
 
+
+
 }

@@ -52,12 +52,12 @@ class CategoryManagerTest {
     void setUp() {
         // Her test öncesi çalıştırılacak alan
         modelMapperService = new ModelMapperManager(new ModelMapper());
-        messageService  =  new MessageManager(getBundleMessageSource());
+        messageService = new MessageManager(getBundleMessageSource());
         categoryDao = mock(CategoryDao.class);
-        categoryManager = new CategoryManager(categoryDao, modelMapperService,messageService);
+        categoryManager = new CategoryManager(categoryDao, modelMapperService, messageService);
     }
 
-    public ResourceBundleMessageSource getBundleMessageSource(){
+    public ResourceBundleMessageSource getBundleMessageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename("messages");
         return messageSource;
@@ -72,8 +72,9 @@ class CategoryManagerTest {
             categoryManager.update(request);
         });
     }
+
     @Test
-    void update(){
+    void update() {
         when(categoryDao.existsById(any())).thenReturn(true);
 
         UpdateCategoryRequest updateCategoryRequest = new UpdateCategoryRequest(1, "Giyim");
@@ -83,6 +84,14 @@ class CategoryManagerTest {
                 new SuccessDataResult<>(new UpdateCategoryResponse(1, "Giyim"));
 
         assert actualResponse.getData().equals(expectedResponse.getData());
+    }
+
+    @Test
+    void deleteById() {
+        Category category = new Category(1, "efe", null);
+        var result = categoryManager.delete(1);
+        assert result.isSuccess() == true;
+
     }
 
 }

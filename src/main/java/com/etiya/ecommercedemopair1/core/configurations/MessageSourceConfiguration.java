@@ -28,7 +28,7 @@ public class MessageSourceConfiguration {
         AcceptHeaderLocaleResolver acceptHeaderLocaleResolver = new AcceptHeaderLocaleResolver();
 
         // Dil gönderilmemişse hangi dili baz alayım?
-        acceptHeaderLocaleResolver.setDefaultLocale(new Locale("tr"));
+        acceptHeaderLocaleResolver.setDefaultLocale(Locale.US);
 
         return acceptHeaderLocaleResolver;
     }
