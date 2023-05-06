@@ -33,7 +33,6 @@ import java.util.stream.Collectors;
 
 public class ProductManager implements ProductService {
     private final ProductDao productDao;
-    private final CategoryService categoryService;
     private final ModelMapperService modelMapperService;
     private final MessageService messageService;
 
@@ -71,11 +70,12 @@ checkIfProductIdExists(id);
 
         AddProductResponse response = this.modelMapperService.forResponse().map(product, AddProductResponse.class);
 
-        return new SuccessDataResult<AddProductResponse>(response, messageService.getMessage(Messages.Product.ProductAdded));
+        return new SuccessDataResult<>(response, messageService.getMessage(Messages.Product.ProductAdded));
     }
 
     @Override
     public DataResult<UpdateProductResponse> update(UpdateProductRequest updateProductRequest) {
+        checkIfProductIdExists(updateProductRequest.getId());
 
         Product product = this.modelMapperService.forRequest().map(updateProductRequest, Product.class);
 
