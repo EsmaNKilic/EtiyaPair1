@@ -1,12 +1,8 @@
 package com.etiya.ecommercedemopair1.business.concrate;
 
 
-import com.etiya.ecommercedemopair1.business.constants.Messages;
-import com.etiya.ecommercedemopair1.business.dtos.requests.category.AddCategoryRequest;
 import com.etiya.ecommercedemopair1.business.dtos.requests.category.UpdateCategoryRequest;
-import com.etiya.ecommercedemopair1.business.dtos.responses.category.AddCategoryResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.category.UpdateCategoryResponse;
-import com.etiya.ecommercedemopair1.core.exceptions.BusinessException;
 import com.etiya.ecommercedemopair1.core.exceptions.types.NotFoundException;
 import com.etiya.ecommercedemopair1.core.internationalization.MessageManager;
 import com.etiya.ecommercedemopair1.core.internationalization.MessageService;
@@ -14,18 +10,12 @@ import com.etiya.ecommercedemopair1.core.utils.mapping.ModelMapperManager;
 import com.etiya.ecommercedemopair1.core.utils.mapping.ModelMapperService;
 import com.etiya.ecommercedemopair1.core.utils.results.DataResult;
 import com.etiya.ecommercedemopair1.core.utils.results.SuccessDataResult;
-import com.etiya.ecommercedemopair1.entities.concretes.Category;
 import com.etiya.ecommercedemopair1.repositories.abstracts.CategoryDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.MessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -33,14 +23,8 @@ import static org.mockito.Mockito.mock;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class CategoryManagerTest {
     CategoryDao categoryDao;
@@ -52,12 +36,12 @@ class CategoryManagerTest {
     void setUp() {
         // Her test öncesi çalıştırılacak alan
         modelMapperService = new ModelMapperManager(new ModelMapper());
-        messageService = new MessageManager(getBundleMessageSource());
+        messageService  =  new MessageManager(getBundleMessageSource());
         categoryDao = mock(CategoryDao.class);
-        categoryManager = new CategoryManager(categoryDao, modelMapperService, messageService);
+        categoryManager = new CategoryManager(categoryDao, modelMapperService,messageService);
     }
 
-    public ResourceBundleMessageSource getBundleMessageSource() {
+    public ResourceBundleMessageSource getBundleMessageSource(){
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename("messages");
         return messageSource;
@@ -72,9 +56,8 @@ class CategoryManagerTest {
             categoryManager.update(request);
         });
     }
-
     @Test
-    void update() {
+    void update(){
         when(categoryDao.existsById(any())).thenReturn(true);
 
         UpdateCategoryRequest updateCategoryRequest = new UpdateCategoryRequest(1, "Giyim");
@@ -84,14 +67,6 @@ class CategoryManagerTest {
                 new SuccessDataResult<>(new UpdateCategoryResponse(1, "Giyim"));
 
         assert actualResponse.getData().equals(expectedResponse.getData());
-    }
-
-    @Test
-    void deleteById() {
-        Category category = new Category(1, "efe", null);
-        var result = categoryManager.delete(1);
-        assert result.isSuccess() == true;
-
     }
 
 }

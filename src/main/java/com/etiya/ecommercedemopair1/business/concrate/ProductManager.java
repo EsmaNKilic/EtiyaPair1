@@ -10,7 +10,6 @@ import com.etiya.ecommercedemopair1.business.dtos.responses.product.ListProductR
 import com.etiya.ecommercedemopair1.business.dtos.responses.product.ProductDetailResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.product.UpdateProductResponse;
 import com.etiya.ecommercedemopair1.core.exceptions.types.BusinessException;
-import com.etiya.ecommercedemopair1.core.exceptions.types.NotFoundException;
 import com.etiya.ecommercedemopair1.core.internationalization.MessageService;
 import com.etiya.ecommercedemopair1.core.utils.mapping.ModelMapperService;
 import com.etiya.ecommercedemopair1.core.utils.results.*;
@@ -32,9 +31,10 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 
 public class ProductManager implements ProductService {
-    private final ProductDao productDao;
-    private final ModelMapperService modelMapperService;
-    private final MessageService messageService;
+  private final ProductDao productDao;
+  private final CategoryService categoryService;
+  private final ModelMapperService modelMapperService;
+  private final MessageService messageService;
 
     @Override
     public DataResult<List<ListProductResponse>> getAll() {
@@ -46,17 +46,17 @@ public class ProductManager implements ProductService {
                         .map(product, ListProductResponse.class))
                 .collect(Collectors.toList());
 
-        return new SuccessDataResult<List<ListProductResponse>>(response, messageService.getMessage(Messages.Product.ListedProduct));
+        return new SuccessDataResult<List<ListProductResponse>>(response,messageService.getMessage(Messages.Product.ListedProduct));
     }
 
     @Override
     public DataResult<ProductDetailResponse> getById(int id) {
-checkIfProductIdExists(id);
+
         Product product = this.productDao.findById(id).get();
 
         ProductDetailResponse response = this.modelMapperService.forResponse().map(product, ProductDetailResponse.class);
 
-        return new SuccessDataResult<ProductDetailResponse>(response, messageService.getMessageWithParams(Messages.Product.GetProductById, id));
+        return new SuccessDataResult<ProductDetailResponse>(response,messageService.getMessageWithParams(Messages.Product.GetProductById,id));
     }
 
     @Override
@@ -64,18 +64,17 @@ checkIfProductIdExists(id);
 
         Product product = this.modelMapperService.forRequest().map(addProductRequest, Product.class);
 
-      checkIfProductIdExists(addProductRequest.getCategoryId());
+        categoryWithIdShouldExists(addProductRequest.getCategoryId());
 
         this.productDao.save(product);
 
         AddProductResponse response = this.modelMapperService.forResponse().map(product, AddProductResponse.class);
 
-        return new SuccessDataResult<>(response, messageService.getMessage(Messages.Product.ProductAdded));
+        return new SuccessDataResult<AddProductResponse>(response, messageService.getMessage(Messages.Product.ProductAdded));
     }
 
     @Override
     public DataResult<UpdateProductResponse> update(UpdateProductRequest updateProductRequest) {
-        checkIfProductIdExists(updateProductRequest.getId());
 
         Product product = this.modelMapperService.forRequest().map(updateProductRequest, Product.class);
 
@@ -83,12 +82,12 @@ checkIfProductIdExists(id);
 
         UpdateProductResponse response = this.modelMapperService.forResponse().map(product, UpdateProductResponse.class);
 
-        return new SuccessDataResult<UpdateProductResponse>(response, messageService.getMessageWithParams(Messages.Product.UpdatedProduct, updateProductRequest.getId()));
+        return new SuccessDataResult<UpdateProductResponse>(response,messageService.getMessageWithParams(Messages.Product.UpdatedProduct,updateProductRequest.getId()));
     }
 
     @Override
-    public Result delete(int id)   {
-checkIfProductIdExists(id);
+    public Result delete(int id) {
+
         this.productDao.deleteById(id);
 
         return new SuccessResult(messageService.getMessage(Messages.Product.DeletedProduct));
@@ -96,17 +95,15 @@ checkIfProductIdExists(id);
 
     @Override
     public DataResult<Slice<ListProductResponse>> getAllWithPagination(Pageable pageable) {
-        return new SuccessDataResult<>(productDao.getAll(pageable));
+        return  new SuccessDataResult<>(productDao.getAll(pageable));
     }
 
     //CONTROLS
-
-    public Result checkIfProductIdExists(int id) {
-        boolean result = productDao.existsById(id);
-        if (!result)
-           throw new BusinessException(messageService.getMessage(Messages.Product.NoExistsProductById));
-        return new SuccessResult();
-
+    private Result categoryWithIdShouldExists(int categoryId){
+        boolean isCategoryExists = productDao.existsById(categoryId);
+        if(isCategoryExists)
+            return new SuccessResult();
+        return new ErrorResult();
         }
-
     }
+

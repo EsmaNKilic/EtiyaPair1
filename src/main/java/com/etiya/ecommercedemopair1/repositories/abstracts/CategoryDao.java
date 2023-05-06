@@ -13,7 +13,7 @@ public interface CategoryDao extends JpaRepository<Category,Integer> {
 
     Category findByName(String name);
 
-   boolean existsCategoryById(int id);
+    boolean existsCategoriesById(int id);
 
 
 

@@ -62,7 +62,6 @@ public class CategoryManager implements CategoryService {
     @Override
     public DataResult<CategoryDetailResponse> GetById(int id) {
 
-        checkIfCategoryWithIdExists(id);
         Category category = this.categoryDao.findById(id).get();
 
         CategoryDetailResponse response = this.modelMapperService.forResponse().map(category, CategoryDetailResponse.class);
@@ -86,7 +85,7 @@ public class CategoryManager implements CategoryService {
 
     @Override
     public Result categoryWithIdShouldExists(int categoryId) {
-        boolean isCategoryExists = categoryDao.existsCategoryById(categoryId);
+        boolean isCategoryExists = categoryDao.existsCategoriesById(categoryId);
         if(isCategoryExists)
             return new SuccessResult();
         return new ErrorResult();
@@ -94,10 +93,11 @@ public class CategoryManager implements CategoryService {
 
     @Override
     public DataResult<UpdateCategoryResponse> update(UpdateCategoryRequest updateCategoryRequest) {
-        checkIfCategoryWithIdExists(updateCategoryRequest.getId());
-        checkIfCategoryWithSameNameExists(updateCategoryRequest.getName());
+
 
         Category category = modelMapperService.forRequest().map(updateCategoryRequest, Category.class);
+        categoryDao.findById(updateCategoryRequest.getId()).orElseThrow(()-> new NotFoundException(messageService.getMessageWithParams(Messages.Category.CategoryDoesNotExistsWithGivenId,updateCategoryRequest.getId())));
+        checkIfCategoryWithSameNameExists(updateCategoryRequest.getName());
         categoryDao.save(category);
 
         UpdateCategoryResponse updateCategoryResponse = this.modelMapperService.forResponse().map(category, UpdateCategoryResponse.class);
@@ -107,7 +107,6 @@ public class CategoryManager implements CategoryService {
 
     @Override
     public Result delete(int id) {
-        checkIfCategoryWithIdExists(id);
         this.categoryDao.deleteById(id);
         return new SuccessResult(messageService.getMessage(Messages.Category.DeletedCategory));
     }
@@ -117,8 +116,7 @@ public class CategoryManager implements CategoryService {
 
     private void checkIfCategoryWithIdExists(int categoryId){
         if(!categoryWithIdShouldExists(categoryId).isSuccess())
-            throw new BusinessException(messageService.getMessage(Messages.Category.CategoryDoesNotExistsWithGivenId));
-
+            throw new NotFoundException(messageService.getMessage(Messages.Category.CategoryDoesNotExistsWithGivenId));
     }
 
     private void checkIfCategoryWithSameNameExists(String categoryName){

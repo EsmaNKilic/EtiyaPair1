@@ -18,6 +18,12 @@ import java.util.Map;
 @RestControllerAdvice
 public class ExceptionHandlers {
 
+    @ExceptionHandler({NotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Result handleNotFoundException(NotFoundException exception){
+        return new ErrorResult(exception.getMessage());
+    }
+
     @ExceptionHandler
     @ResponseStatus(code= HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationExceptions(MethodArgumentNotValidException methodArgumentNotValidException){
@@ -37,13 +43,5 @@ public class ExceptionHandlers {
     public ErrorDataResult<Object> handleBusinessExceptions(BusinessException businessException){
         ErrorDataResult<Object> errorDataResult = new ErrorDataResult<Object>(businessException.getMessage(),"BUSINESS.EXCEPTION");
         return errorDataResult;
-    }
-
-
-    // 404 not found
-    @ExceptionHandler({NotFoundException.class})
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public Result handleNotFoundException(NotFoundException exception) {
-        return new ErrorResult(exception.getMessage());
     }
 }
