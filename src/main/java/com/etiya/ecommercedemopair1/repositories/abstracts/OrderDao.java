@@ -1,5 +1,6 @@
 package com.etiya.ecommercedemopair1.repositories.abstracts;
 
+import com.etiya.ecommercedemopair1.business.constants.Messages;
 import com.etiya.ecommercedemopair1.business.dtos.requests.order.AddOrderRequest;
 import com.etiya.ecommercedemopair1.business.dtos.responses.order.ListOrderResponse;
 import com.etiya.ecommercedemopair1.business.dtos.responses.order.OrderDetailResponse;
@@ -15,6 +16,7 @@ public interface OrderDao extends JpaRepository<Order,Integer> {
 
     Order findByCustomerName (String name);
 
+    Order existsOrderById(int id);
     @Query("from Order where status=:status")
     List<Order> getOrderByStatus (boolean status);
 

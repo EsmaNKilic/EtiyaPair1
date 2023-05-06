@@ -19,6 +19,8 @@ public class Messages {
         public static final String NoExistsProductById = "existsOneProductMessage";
         public static final String UpdatedProduct = "productUpdated";
         public static final String GetProductById = "getProduct";
+
+
     }
 
     public static class Order {

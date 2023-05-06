@@ -101,10 +101,12 @@ checkIfProductIdExists(id);
 
     //CONTROLS
 
-    public void checkIfProductIdExists(int id) {
-        if (!productDao.existsById(id)) {
-            throw new NotFoundException(messageService.getMessageWithParams(Messages.Product.NoExistsProductById,id));
+    public Result checkIfProductIdExists(int id) {
+        boolean result = productDao.existsById(id);
+        if (!result)
+           throw new BusinessException(messageService.getMessage(Messages.Product.NoExistsProductById));
+        return new SuccessResult();
+
         }
 
     }
-}
