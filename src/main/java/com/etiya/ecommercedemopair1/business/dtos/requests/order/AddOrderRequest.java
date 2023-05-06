@@ -21,6 +21,6 @@ public class AddOrderRequest {
     @NotNull(message = "{NotEmptyMessage]") // direkt alanı getirmez
     private Boolean status;
 
-    private String ProductName;
-    List<AddProductOrderRequest> addProductOrderRequests;
+
+   private List<AddProductOrderRequest> productOrder;
 }

@@ -65,7 +65,7 @@ checkIfProductIdExists(id);
 
         Product product = this.modelMapperService.forRequest().map(addProductRequest, Product.class);
 
-        categoryWithIdShouldExists(addProductRequest.getCategoryId());
+      checkIfProductIdExists(addProductRequest.getCategoryId());
 
         this.productDao.save(product);
 
@@ -100,12 +100,6 @@ checkIfProductIdExists(id);
     }
 
     //CONTROLS
-    private Result categoryWithIdShouldExists(int categoryId) {
-        boolean isCategoryExists = productDao.existsById(categoryId);
-        if (isCategoryExists)
-            return new SuccessResult();
-        return new ErrorResult();
-    }
 
     public void checkIfProductIdExists(int id) {
         if (!productDao.existsById(id)) {

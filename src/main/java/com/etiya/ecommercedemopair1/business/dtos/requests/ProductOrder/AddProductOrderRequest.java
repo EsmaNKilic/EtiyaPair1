@@ -1,13 +1,16 @@
 package com.etiya.ecommercedemopair1.business.dtos.requests.ProductOrder;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddProductOrderRequest {
+    @Positive(message = "{PositiveValueIdMessage}")
+    @NotNull(message = "{NotEmptyMessage}")
     private int productId;
-    //private int quantity;
+
 }

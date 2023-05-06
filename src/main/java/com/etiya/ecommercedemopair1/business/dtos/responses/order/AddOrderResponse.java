@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddOrderResponse {
-    private Integer id;
+    private int id;
     private String description;
-    private Boolean status;
-    private  Integer productId;
+    private boolean status;
+    private  int productId;
 }

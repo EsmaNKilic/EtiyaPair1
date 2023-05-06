@@ -28,9 +28,8 @@ public class ProductOrderManager implements ProductOrderService {
     public Result addRange(int orderId, List<AddProductOrderRequest> addProductOrderRequest) {
         for (AddProductOrderRequest request: addProductOrderRequest) {
             ProductOrder detail = modelMapperService.forRequest().map(request, ProductOrder.class);
-            Order order = new Order();
-            order.setId(orderId);
-            detail.setOrder(order);
+
+            detail.getOrder().setId(orderId);
             productOrderDao.save(detail);
         }
         return new SuccessResult();

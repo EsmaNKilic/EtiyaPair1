@@ -65,16 +65,15 @@ public class OrderManager implements OrderService {
     @Override
     public DataResult<AddOrderResponse> add(AddOrderRequest addOrderRequest) {
 
-        Order order = new Order();
-
-        this.orderDao.save(order);
-
-        productOrderService.addRange(order.getId(), addOrderRequest.getAddProductOrderRequests());
+     Order order = this.modelMapperService.forRequest().map(addOrderRequest,Order.class);
 
 
-        AddOrderResponse response = this.modelMapperService.forResponse().map(order, AddOrderResponse.class);
+    this.orderDao.save(order);
+     productOrderService.addRange(order.getId(),addOrderRequest.getProductOrder());
+     AddOrderResponse addOrderResponse = this.modelMapperService.forResponse().map(order,AddOrderResponse.class);
+        addOrderResponse.setProductId(addOrderRequest.getProductOrder().stream().map(addProductOrderRequest -> addProductOrderRequest.getProductId()).findFirst().get());
+     return new SuccessDataResult<>(addOrderResponse);
 
-        return new SuccessDataResult<AddOrderResponse>(response, messageService.getMessage(Messages.Order.OrderAdded));
     }
 
     @Override
